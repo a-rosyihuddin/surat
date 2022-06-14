@@ -2,13 +2,13 @@
 include "../connect/koneksi.php";
 include "../proses_login/session_login.php";
 $nik = $_SESSION["nik"];
-$tb_user = mysqli_query($koneksi,"SELECT * FROM tb_user where nik='$nik'");
-$data = mysqli_fetch_assoc($tb_user);
-$nama = $data["nama"];
+$tb_user = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM tb_user where nik='$nik'"));
+$nama = $tb_user["nama_user"];
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,9 +19,10 @@ $nama = $data["nama"];
     <link href="../assets/img/gresik.png" rel="icon">
     <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
+
 <body>
-    <?php include "../desain/sidebar_admin.php";?>
-    <?php include "../desain/navbar_admin.php";?>
+    <?php include "../desain/sidebar_admin.php"; ?>
+    <?php include "../desain/navbar_admin.php"; ?>
     <!-- Awal Isi Konten -->
     <div class="container-fluid" style="height:66%; width:70%;">
         <!-- Halaman kepala -->
@@ -34,15 +35,15 @@ $nama = $data["nama"];
                 </div>
             </div>
             <div class="card-body" style="margin: auto;margin-top: 10%; margin-left: 40%;">
-                <form action="../update_data/update_file.php?id_pengajuan=<?= $_GET['id_pengajuan']?>&jenis_surat=<?= $_GET['jenis_surat']?>&nama=<?= $_GET['nama']?>&kode_surat=<?= $_GET['kode_surat']?>"  method="POST" enctype="multipart/form-data">
+                <form action="../update_data/update_file.php?id_pengajuan=<?= $_GET['id_pengajuan'] ?>&jenis_surat=<?= $_GET['jenis_surat'] ?>&nama=<?= $_GET['nama'] ?>&kode_surat=<?= $_GET['kode_surat'] ?>" method="POST" enctype="multipart/form-data">
                     <div class="mb-3" style="margin-left: -34%;">
-                    <table border="1px">
-                        <tr>
-                            <td>
-                                <input type="file" name="file" style="margin: auto;">
-                            </td>
-                        </tr>
-                    </table>
+                        <table border="1px">
+                            <tr>
+                                <td>
+                                    <input type="file" name="file" style="margin: auto;">
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                     <div class="col-auto my-1">
                         <button type="submit" class="btn btn-primary">Submit</button>
@@ -71,4 +72,5 @@ $nama = $data["nama"];
     <!-- Page level custom scripts -->
     <script src="../js/demo/datatables-demo.js"></script>
 </body>
+
 </html>

@@ -2,13 +2,13 @@
 include "../connect/koneksi.php";
 include "../proses_login/session_login.php";
 $nik = $_SESSION["nik"];
-$tb_user = mysqli_query($koneksi,"SELECT * FROM tb_user where nik='$nik'");
-$data = mysqli_fetch_assoc($tb_user);
-$nama = $data["nama"];
+$tb_user = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM tb_user where nik='$nik'"));
+$nama = $tb_user["nama_user"];
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,37 +19,38 @@ $nama = $data["nama"];
     <link href="../assets/img/gresik.png" rel="icon">
     <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
+
 <body>
-    <?php include "../desain/sidebar_admin.php";?>
-    <?php include "../desain/navbar_admin.php";?>
+    <?php include "../desain/sidebar_admin.php"; ?>
+    <?php include "../desain/navbar_admin.php"; ?>
     <?php
-    if(isset($_SESSION["pesan"])){
-      if($_SESSION["pesan"]=="sukses"){?>
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>BERHASIL!!</strong> Checkin Berhasil
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+    if (isset($_SESSION["pesan"])) {
+        if ($_SESSION["pesan"] == "sukses") { ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>BERHASIL!!</strong> Checkin Berhasil
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         <?php unset($_SESSION["pesan"]);
-      }elseif($_SESSION["pesan"]== "gagal"){?>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>GAGAL!!!</strong> Checkin Gagal
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <?php 
-        unset($_SESSION["pesan"]);
-      }
-    }?>
+        } elseif ($_SESSION["pesan"] == "gagal") { ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>GAGAL!!!</strong> Checkin Gagal
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+    <?php
+            unset($_SESSION["pesan"]);
+        }
+    } ?>
     <!-- Awal Isi Konten -->
     <div class="container-fluid">
         <!-- Halaman kepala -->
         <h1 class="h3 mb-2 text-gray-800">Pengajuan Yang Di Terima</h1>
         <!-- Data Tabel -->
         <div class="card shadow mb-4">
-        <div class="card-header">
+            <div class="card-header">
                 <div class="d-sm-flex align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">Daftar Pengajuan Yang Di Terima</h6>
                 </div>
@@ -97,4 +98,5 @@ $nama = $data["nama"];
     <!-- Page level custom scripts -->
     <script src="../js/demo/datatables-demo.js"></script>
 </body>
+
 </html>

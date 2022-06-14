@@ -2,45 +2,54 @@
 include "../connect/koneksi.php";
 include "../proses_login/session_login.php";
 $nik = $_SESSION["nik"];
-$tb_user = mysqli_query($koneksi,"SELECT * FROM tb_user where nik='$nik'");
-$data = mysqli_fetch_assoc($tb_user);
-$nama = $data["nama"];
+$tb_user = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM tb_user where nik='$nik'"));
+$nama = $tb_user["nama_user"];
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin | Dashboard</title>
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link rel = "icon" href = "../images/logo.png" type = "image/png">
+    <link rel="icon" href="../images/logo.png" type="image/png">
     <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
+
 <body>
-    <?php include "../desain/sidebar_admin.php";?>
-    <?php include "../desain/navbar_admin.php";?>
+    <?php include "../desain/sidebar_admin.php"; ?>
+    <?php include "../desain/navbar_admin.php"; ?>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <?php
-    if(isset($_SESSION["pesan"])){
-      if($_SESSION["pesan"]=="sukses"){?>
-        <script>Swal.fire('SUKSES','BARANG BERHASIL DI HAPUS','success')</script>
+    if (isset($_SESSION["pesan"])) {
+        if ($_SESSION["pesan"] == "sukses") { ?>
+            <script>
+                Swal.fire('SUKSES', 'BARANG BERHASIL DI HAPUS', 'success')
+            </script>
         <?php unset($_SESSION["pesan"]);
-      }elseif($_SESSION["pesan"]== "gagal"){?>
-        <script>Swal.fire('ERROR','BARANG GAGAL DI HAPUS ','error')</script>
-        <?php 
-        unset($_SESSION["pesan"]);
-      }elseif($_SESSION["pesan"]== "sukses1"){?>
-        <script>Swal.fire('SUKSES','BARANG BERHASIL DI UPDATE ','success')</script>
-        <?php 
-        unset($_SESSION["pesan"]);
-      }elseif($_SESSION["pesan"]== "gagal1"){?>
-        <script>Swal.fire('ERROR','BARANG GAGAL DI UPDATE','error')</script>
-        <?php 
-        unset($_SESSION["pesan"]);
-      }
+        } elseif ($_SESSION["pesan"] == "gagal") { ?>
+            <script>
+                Swal.fire('ERROR', 'BARANG GAGAL DI HAPUS ', 'error')
+            </script>
+        <?php
+            unset($_SESSION["pesan"]);
+        } elseif ($_SESSION["pesan"] == "sukses1") { ?>
+            <script>
+                Swal.fire('SUKSES', 'BARANG BERHASIL DI UPDATE ', 'success')
+            </script>
+        <?php
+            unset($_SESSION["pesan"]);
+        } elseif ($_SESSION["pesan"] == "gagal1") { ?>
+            <script>
+                Swal.fire('ERROR', 'BARANG GAGAL DI UPDATE', 'error')
+            </script>
+    <?php
+            unset($_SESSION["pesan"]);
+        }
     }
     ?>
 
@@ -98,4 +107,5 @@ $nama = $data["nama"];
     <!-- Page level custom scripts -->
     <script src="../js/demo/datatables-demo.js"></script>
 </body>
+
 </html>

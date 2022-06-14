@@ -9,26 +9,25 @@ $nama_file = $_FILES["file"]["name"];
 $size = $_FILES["file"]["size"];
 $lokasi = $_FILES["file"]["tmp_name"];
 $error = $_FILES["file"]["error"];
-$pemisah = explode('.',$nama_file);
+$pemisah = explode('.', $nama_file);
 $ekstention = strtolower(end($pemisah));
-$namaBaru = $id_pengajuan.'-'.$nama.'-'.$jenis_surat.'.'.$ekstention;
+$namaBaru = $id_pengajuan . '-' . $nama . '-' . $jenis_surat . '.' . $ekstention;
 
-if(in_array($ekstention,['doc','docx','pdf']) and $size <= 10000000 and $error == 0){
-    if(move_uploaded_file($lokasi,"../surat_keluar/".$namaBaru)){
-        $update = mysqli_query($koneksi,"UPDATE tb_surat_keluar SET tb_surat_keluar.file_surat='$namaBaru' where tb_surat_keluar.id_pengajuan='$id_pengajuan'");
-        if($update){
+if (in_array($ekstention, ['doc', 'docx', 'pdf']) and $size <= 10000000 and $error == 0) {
+    if (move_uploaded_file($lokasi, "../surat_keluar/" . $namaBaru)) {
+        $update = mysqli_query($koneksi, "UPDATE tb_arsip_surat SET tb_arsip_surat.file_surat='$namaBaru', tb_arsip_surat.tgl_surat = CURDATE(), tb_arsip_surat.keterangan = 'Surat Keluar' where tb_arsip_surat.id_pengajuan='$id_pengajuan'");
+        if ($update) {
             header("location: ../admin/diterima.php?id_pengajuan=$id_pengajuan");
             $_SESSION["pesan"] = "sukses";
             echo "Berhasil";
-        }else{
+        } else {
             header("location: ../admin/diterima.php?id_pengajuan=$id_pengajuan");
             $_SESSION["pesan"] = "gagal";
             echo "Gagal";
         }
     }
-}else{
+} else {
     header("location: ../admin/diterima.php?id_pengajuan=$id_pengajuan");
     $_SESSION["pesan"] = "gagal";
     echo "Gagal1";
 }
-?>

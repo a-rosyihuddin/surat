@@ -6,7 +6,7 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center">
-                <div>Selamat Datang <?= $data["nama"]?></div>
+                <div>Selamat Datang <?= $tb_user["nama_user"] ?></div>
             </a>
 
             <!-- Divider -->
@@ -27,8 +27,7 @@
 
             <!-- Nav Item - User Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#userMenu"
-                    aria-expanded="true" aria-controls="userMenu">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#userMenu" aria-expanded="true" aria-controls="userMenu">
                     <i class="fas fa-user"></i>
                     <span>User</span>
                 </a>
@@ -42,17 +41,16 @@
 
             <!-- Nav Item - Reservasi Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#reservasi"
-                    aria-expanded="true" aria-controls="reservasi">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#reservasi" aria-expanded="true" aria-controls="reservasi">
                     <i class="fas fa-book-open"></i>
                     <span>Pengajuan</span>
                 </a>
-                <div id="reservasi" class="collapse" aria-labelledby="headingReservasi"
-                    data-parent="#accordionSidebar">
+                <div id="reservasi" class="collapse" aria-labelledby="headingReservasi" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Menu</h6>
                         <a class="collapse-item" href="../admin/diterima.php">Pengajuan Di Terima</a>
                         <a class="collapse-item" href="../admin/ditolak.php">Pengajuan Di Tolak</a>
+                        <a class="collapse-item" href="../admin/pengajuan_revisi.php">Pengajuan Revisi</a>
                         <a class="collapse-item" href="../admin/semua_pengajuan.php">Riwayat Pengajuan</a>
                     </div>
                 </div>
@@ -60,13 +58,11 @@
 
             <!-- Nav Item - surat Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#surat"
-                    aria-expanded="true" aria-controls="surat">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#surat" aria-expanded="true" aria-controls="surat">
                     <i class="fas fa-envelope"></i>
                     <span>Surat</span>
                 </a>
-                <div id="surat" class="collapse" aria-labelledby="headingsurat"
-                    data-parent="#accordionSidebar">
+                <div id="surat" class="collapse" aria-labelledby="headingsurat" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Pilihan</h6>
                         <a class="collapse-item" href="../admin/semua_surat.php">Semua Surat Keluar</a>

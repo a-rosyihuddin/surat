@@ -1,14 +1,15 @@
 <?php
+include('connect/koneksi.php');
 session_start();
 // di gunakan agar tidak dapat masuk ke tampilan user maupun admin
-if(isset($_SESSION['nik'])){
-    if($_SESSION["nik"]== "admin"){
-        header('location: admin/page_admin.php');
-        exit;
-    }else if($_SESSION["nik"]!="admin"){
-        header('location: user/home.php');
-        exit;
-    }
+if (isset($_SESSION['nik'])) {
+  if ($_SESSION["nik"] == "admin") {
+    header('location: admin/page_admin.php');
+    exit;
+  } else if ($_SESSION["nik"] != "admin") {
+    header('location: user/home.php');
+    exit;
+  }
 }
 ?>
 <!DOCTYPE html>
@@ -50,7 +51,7 @@ if(isset($_SESSION['nik'])){
 
 <body>
   <!-- ======= Top Bar ======= -->
-<section id="topbar" class="d-flex align-items-center">
+  <section id="topbar" class="d-flex align-items-center">
     <div class="container d-flex justify-content-center justify-content-md-between">
       <div class="contact-info d-flex align-items-center">
         <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:pemerintahdesapare@gmail.com">pemdespare@gmail.com</a></i>
@@ -67,12 +68,12 @@ if(isset($_SESSION['nik'])){
 
   <!-- ======= Header ======= -->
   <header id="header" class="d-flex align-items-center">
-    <div class="container d-flex justify-content-between align-items-center" > 
-      
+    <div class="container d-flex justify-content-between align-items-center">
 
-      <div class="logo" > 
-        <h1><a href="index.html">  Kelurahan Desa Pare</a></h1>
-        
+
+      <div class="logo">
+        <h1><a href="index.html"> Kelurahan Desa Pare</a></h1>
+
         <!-- Uncomment below if you prefer to use an image logo -->
       </div>
 
@@ -91,27 +92,27 @@ if(isset($_SESSION['nik'])){
 
   <!-- ======= Hero Section ======= -->
   <section id="hero">
-    <div class="hero-container" >
+    <div class="hero-container">
       <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
 
         <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
-          <div class="carousel-item active" style="background: url(assets/img/slide/slide-1.jpg)">
-            <div class="carousel-container">
-              <img src="assets/img/gresik.png" alt="" class="img-fluid" style="width: 27%; margin-left: 5%">
-              <div class="carousel-content">
-                <h2 class="animate__animated animate__fadeInDown">Welcome to <span>Kesetariatan Desa Pare</span></h2>
-                <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-                <a href="proses_login/login.php" class="btn-get-started animate__animated animate__fadeInUp">Get Started</a>
-              </div>
+        <div class="carousel-item active" style="background: url(assets/img/slide/slide-1.jpg)">
+          <div class="carousel-container">
+            <img src="assets/img/gresik.png" alt="" class="img-fluid" style="width: 27%; margin-left: 5%">
+            <div class="carousel-content">
+              <h2 class="animate__animated animate__fadeInDown">Welcome to <span>Kesetariatan Desa Pare</span></h2>
+              <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+              <a href="proses_login/login.php" class="btn-get-started animate__animated animate__fadeInUp">Get Started</a>
             </div>
           </div>
+        </div>
 
 
       </div>
     </div>
   </section><!-- End Hero -->
 
-  <?php include "desain/footer.php"?>
+  <?php include "desain/footer.php" ?>
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 

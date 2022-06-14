@@ -1,5 +1,5 @@
-<?php include "../proses_login/session_login.php";?>
-<?php include "../connect/koneksi.php";?>
+<?php include "../proses_login/session_login.php"; ?>
+<?php include "../connect/koneksi.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,76 +39,87 @@
 
 <body>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <?php include "../desain/navbar.php"?>
+  <?php include "../desain/navbar.php" ?>
   <!-- ======= Hero Section ======= -->
   <?php
-  if(isset($_SESSION["pesan"])){
-    if($_SESSION["pesan"]=="sukses"){?>
-      <script>Swal.fire('SUKSES','PENGAJUAN SUKSES','success')</script>
-      <?php unset($_SESSION["pesan"]);
-    }elseif($_SESSION["pesan"]== "gagal"){?>
-      <script>Swal.fire('ERROR','PENGAJUAN GAGAL','error')</script>
-      <?php 
+  if (isset($_SESSION["pesan"])) {
+    if ($_SESSION["pesan"] == "sukses") { ?>
+      <script>
+        Swal.fire('SUKSES', 'PENGAJUAN SUKSES', 'success')
+      </script>
+    <?php unset($_SESSION["pesan"]);
+    } elseif ($_SESSION["pesan"] == "gagal") { ?>
+      <script>
+        Swal.fire('ERROR', 'PENGAJUAN GAGAL', 'error')
+      </script>
+  <?php
       unset($_SESSION["pesan"]);
     }
   }
 
   $nik = $_SESSION['nik'];
-  // $data_surat = mysqli_query($koneksi,"SELECT * FROM tb_surat_keluar INNER JOIN tb_surat RIGHT JOIN tb_pengajuan ON tb_surat_keluar.kode_surat=tb_surat.kode_surat AND tb_pengajuan.id_pengajuan=tb_surat_keluar.id_pengajuan AND tb_surat_keluar.nik_user='$nik'");
-  $data_pengajuan = mysqli_fetch_all(mysqli_query($koneksi,"SELECT tb_pengajuan.nik_user, tb_pengajuan.status_pengajuan,tb_pengajuan.kode_surat,tb_surat.jenis_surat FROM tb_pengajuan INNER JOIN tb_surat ON tb_pengajuan.kode_surat= tb_surat.kode_surat WHERE tb_pengajuan.nik_user='$nik'"));
-  $data_surat = mysqli_query($koneksi,"SELECT * FROM tb_surat_keluar WHERE tb_surat_keluar.nik_user='$nik'");
-  $data_surat_keluar = mysqli_fetch_all(mysqli_query($koneksi,"SELECT * FROM tb_surat_keluar WHERE tb_surat_keluar.nik_user='$nik'"));
+
+  $data_pengajuan = mysqli_query($koneksi, "SELECT tb_pengajuan.status_pengajuan, tb_surat.jenis_surat FROM tb_pengajuan INNER JOIN tb_surat USING(kode_surat) WHERE tb_pengajuan.nik = '$nik'");
+  $data_arsip_surat = mysqli_fetch_row(mysqli_query($koneksi, "SELECT * FROM tb_arsip_surat INNER JOIN tb_pengajuan USING(id_pengajuan) INNER JOIN tb_user USING(nik) WHERE tb_user.nik= '$nik'"));
   ?>
 
   <main id="main">
-    
+
     <!-- ======= Services Section ======= -->
     <section id="services" class="services">
       <div class="container" style="margin-top: 40PX;">
         <img src="../assets/img/gresik.png" alt="" class="img-fluid" style="width: 10%; margin-top: 15PX; margin-bottom: 15px; margin-left:180px">
-        <h1 style="text-align: center; margin-top: -90px; margin-left: -75px; margin-bottom: 40px; margin-right:-200px" > RIWAYAT PENGAJUAN SURAT</h1>
+        <h1 style="text-align: center; margin-top: -90px; margin-left: -75px; margin-bottom: 40px; margin-right:-200px"> RIWAYAT PENGAJUAN SURAT</h1>
       </div>
       <div class="contaiiner" style="margin:100px; margin-top:100px">
-      <?php 
-        if(mysqli_num_rows($data_surat)==0){
+        <?php
+        if (mysqli_fetch_assoc($data_pengajuan) == NULL) {
           echo '<h1>Tidak Ada Pengajuan Surat<h1>';
-        }else{
+        } else {
           $y = 0;
-          for($i=0; $i < count($data_pengajuan); $i++){
-            if ($data_pengajuan[$i][1]=='Di Terima'){
-              if($data_surat_keluar[$y][4]==""){?>
-                  <div class="card w-70" style="margin-bottom: 15px;">
-                    <div class="card-body" style="background-color:lavender;">
-                      <h5 class="card-title"><?= $data_pengajuan[$i][3]?></h5>
-                      <h5 class="card-title" style="text-align: right;">Surat Sedang Dalam Proses</h5>
-                    </div>
-                  </div>
-              <?php }else{?>
-                <div class="card w-70" style="margin-bottom: 15px;">
-                    <div class="card-body" style="background-color:lavender;">
-                        <h5 class="card-title"><?= $data_pengajuan[$i][3]?></h5>
-                        <a href="../surat_keluar/<?= $data_surat_keluar[$y][4]?>" class="btn btn-primary">Download</a>
-                    </div>
-                </div>
-            <?php }$y++;
-            }elseif($data_pengajuan[$i][1]=='Di Tolak'){?>
-              <div class="card w-70" style="margin-bottom: 15px;">
-                <div class="card-body" style="background-color:lavender;">
-                  <h5 class="card-title"><?= $data_pengajuan[$i][3]?></h5>
-                  <h5 class="card-title" style="text-align: right;">Pengajuan Di Tolak</h5>
-                  </div>
-              </div>
-            <?php }else{?>
+          foreach ($data_pengajuan as $row) {
+            if ($row['status_pengajuan'] == 'Di Terima') {
+              var_dump($data_arsip_surat[0]);
+              die;
+              if ($data_arsip_surat[$y] != '') { ?>
                 <div class="card w-70" style="margin-bottom: 15px;">
                   <div class="card-body" style="background-color:lavender;">
-                    <h5 class="card-title"><?= $data_pengajuan[$i][3]?></h5>
-                    <h5 class="card-title" style="text-align: right;">Pengajuan Dalam Proses</h5>
-                    </div>
+                    <h5 class="card-title"><?= $row['jenis_surat'] ?></h5>
+                    <a href="../surat_keluar/<?= $surat ?>" class="btn btn-primary">Download</a>
+                  </div>
                 </div>
-        <?php
-              }
-            }
-          }?>
+              <?php } else { ?>
+                <div class="card w-70" style="margin-bottom: 15px;">
+                  <div class="card-body" style="background-color:lavender;">
+                    <h5 class="card-title"><?= $row['jenis_surat'] ?></h5>
+                    <small>Surat Sedang Dalam Proses Pembuatan</small>
+                    <h5 class="card-title" style="text-align: right;">Pengajuan Di Terima </h5>
+                  </div>
+                </div>
+              <?php } ?>
+            <?php } elseif ($row['status_pengajuan'] == 'Menunggu') { ?>
+              <div class="card w-70" style="margin-bottom: 15px;">
+                <div class="card-body" style="background-color:lavender;">
+                  <h5 class="card-title"><?= $row['jenis_surat'] ?></h5>
+                  <small>Surat Sedang Dalam Proses Pengajuan Mohon Di Tunggu</small>
+                  <h5 class="card-title" style="text-align: right;">Proses Pengajuan</h5>
+                </div>
+              </div>
+            <?php } elseif ($row['status_pengajuan'] == 'Di Tolak') { ?>
+              <div class="card w-70" style="margin-bottom: 15px;">
+                <div class="card-body" style="background-color:lavender;">
+                  <h5 class="card-title"><?= $row['jenis_surat'] ?></h5>
+                  <small>Pengajuan Surat Anda Di Tolak Mohon Memasukkan Data Diri Dengan Benar</small>
+                  <h5 class="card-title" style="text-align: right;">Pengajuan Di Tolak</h5>
+                </div>
+              </div>
+            <?php }  ?>
+        <?php $y++;
+          }
+        } ?>
+
+
+
       </div>
     </section><!-- End Services Section -->
     <!-- ======= Clients Section ======= -->
