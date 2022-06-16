@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 14, 2022 at 12:47 AM
+-- Generation Time: Jun 16, 2022 at 09:08 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -30,18 +30,19 @@ SET time_zone = "+00:00";
 CREATE TABLE `tb_arsip_surat` (
   `nomor_surat` varchar(50) NOT NULL,
   `id_pengajuan` int(11) NOT NULL,
-  `file_surat` longblob DEFAULT NULL,
-  `tgl_surat` date DEFAULT NULL,
-  `keterangan` varchar(50) DEFAULT NULL
+  `file_surat` varchar(255) DEFAULT NULL,
+  `tgl_surat` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tb_arsip_surat`
 --
 
-INSERT INTO `tb_arsip_surat` (`nomor_surat`, `id_pengajuan`, `file_surat`, `tgl_surat`, `keterangan`) VALUES
-('01/SKTM/DesaGluranPloso/06/2022', 23, 0x32332d41686d61642d5375726174204b65746572616e67616e20546964616b204d616d6170752e706466, '2022-06-13', 'Surat Keluar'),
-('02/SKTM/DesaGluranPloso/06/2022', 24, '', NULL, 'Surat Keluar');
+INSERT INTO `tb_arsip_surat` (`nomor_surat`, `id_pengajuan`, `file_surat`, `tgl_surat`) VALUES
+('01/SKTM/DesaGluranPloso/06/2022', 31, '31-Ahmad-Surat Keterangan Tidak Mamapu.pdf', '2022-06-16'),
+('02/SKTM/DesaGluranPloso/06/2022', 32, '', NULL),
+('03/SKTM/DesaGluranPloso/06/2022', 31, '', NULL),
+('04/SKTM/DesaGluranPloso/06/2022', 32, '', NULL);
 
 -- --------------------------------------------------------
 
@@ -64,8 +65,9 @@ CREATE TABLE `tb_pengajuan` (
 --
 
 INSERT INTO `tb_pengajuan` (`id_pengajuan`, `nik`, `kode_surat`, `tgl_pengajuan`, `keperluan`, `jenis_pengajuan`, `status_pengajuan`) VALUES
-(23, '1234567', 'SKTM', '2022-06-13 21:31:04', 'fedvxrgt', 'Baru', 'Di Terima'),
-(24, '1234567', 'SKTM', '2022-06-13 21:47:54', 'gdbhxfh', 'Baru', 'Di Terima');
+(31, '1234567', 'SKTM', '2022-06-16 11:40:57', 'dxwadfw', 'Revisi', 'Di Tolak'),
+(32, '1234567', 'SKTM', '2022-06-16 11:59:18', 'dxwadfw', 'Baru', 'Di Terima'),
+(33, '1234567', 'SKTM', '2022-06-16 12:33:35', 'dxwadfw', 'Baru', 'Menunggu');
 
 -- --------------------------------------------------------
 
@@ -134,8 +136,9 @@ CREATE TABLE `tb_sktm` (
 --
 
 INSERT INTO `tb_sktm` (`id_pengajuan_sktm`, `kode_surat`, `nama_sktm`, `tempat_lahir_sktm`, `tgl_lahir_sktm`, `gender_sktm`, `status_sktm`, `pekerjaan_sktm`, `alamat_sktm`) VALUES
-(23, '12345', 'SKTM', 'yjyuyjj', '2022-06-08', 'Laki-Laki', 'jhgk', 'khjk', 'kjhbk'),
-(24, '12345', 'SKTM', 'yjcgjjgj', '2022-06-14', 'Perempuan', 'jhgc', 'hgkkk', 'kghkg');
+(31, '12345', 'SKTM', 'mjbm', '2022-06-17', 'Laki-Laki', 'jb,b ,', ',jn,j', 'ljl'),
+(32, '12345', 'SKTM', 'hyhy', '2022-06-15', 'Laki-Laki', 'dwda', 'eaadf', 'dsf'),
+(33, '12345', 'SKTM', 'juiui', '2022-06-17', 'Laki-Laki', 'iyukiuy', 'uyoy', 'oyoyi');
 
 -- --------------------------------------------------------
 
@@ -230,10 +233,25 @@ CREATE TABLE `tb_surat` (
 INSERT INTO `tb_surat` (`kode_surat`, `jenis_surat`, `surat_keluar`) VALUES
 ('SKK', 'Surat Keterangan Kematian', 0),
 ('SKM', 'Surat Keterangan Menikah', 0),
-('SKTM', 'Surat Keterangan Tidak Mamapu', 2),
+('SKTM', 'Surat Keterangan Tidak Mamapu', 6),
 ('SL', 'Surat Lainnya', 0),
+('SM', 'Surat Masuk', 0),
 ('SPA', 'Surat Pengantar Akta', 0),
 ('SPK', 'Surat Pengantar KTP', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_surat_masuk`
+--
+
+CREATE TABLE `tb_surat_masuk` (
+  `nomor_surat` varchar(50) NOT NULL,
+  `nik` varchar(100) NOT NULL,
+  `jenis_surat` varchar(100) DEFAULT NULL,
+  `file_surat` varchar(255) NOT NULL,
+  `tgl_surat_masuk` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -243,6 +261,7 @@ INSERT INTO `tb_surat` (`kode_surat`, `jenis_surat`, `surat_keluar`) VALUES
 
 CREATE TABLE `tb_user` (
   `nik` varchar(100) NOT NULL,
+  `user_nik` varchar(100) DEFAULT NULL,
   `nama_user` varchar(100) NOT NULL,
   `rt` char(10) DEFAULT NULL,
   `rw` char(10) DEFAULT NULL,
@@ -253,9 +272,9 @@ CREATE TABLE `tb_user` (
 -- Dumping data for table `tb_user`
 --
 
-INSERT INTO `tb_user` (`nik`, `nama_user`, `rt`, `rw`, `role_user`) VALUES
-('1234567', 'Ahmad', '2', '1', 'Warga'),
-('admin', 'admin', '', '', 'Admin');
+INSERT INTO `tb_user` (`nik`, `user_nik`, `nama_user`, `rt`, `rw`, `role_user`) VALUES
+('1234567', '1234567', 'Ahmad', '2', '1', 'Warga'),
+('admin', 'admin', 'admin', '', '', 'Admin');
 
 --
 -- Indexes for dumped tables
@@ -319,10 +338,18 @@ ALTER TABLE `tb_surat`
   ADD PRIMARY KEY (`kode_surat`);
 
 --
+-- Indexes for table `tb_surat_masuk`
+--
+ALTER TABLE `tb_surat_masuk`
+  ADD PRIMARY KEY (`nomor_surat`),
+  ADD KEY `nik` (`nik`);
+
+--
 -- Indexes for table `tb_user`
 --
 ALTER TABLE `tb_user`
-  ADD PRIMARY KEY (`nik`);
+  ADD PRIMARY KEY (`nik`),
+  ADD UNIQUE KEY `user_nik` (`user_nik`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -332,7 +359,7 @@ ALTER TABLE `tb_user`
 -- AUTO_INCREMENT for table `tb_pengajuan`
 --
 ALTER TABLE `tb_pengajuan`
-  MODIFY `id_pengajuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_pengajuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `tb_skk`
@@ -350,7 +377,7 @@ ALTER TABLE `tb_skm`
 -- AUTO_INCREMENT for table `tb_sktm`
 --
 ALTER TABLE `tb_sktm`
-  MODIFY `id_pengajuan_sktm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_pengajuan_sktm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `tb_sl`
@@ -422,6 +449,12 @@ ALTER TABLE `tb_spa`
 --
 ALTER TABLE `tb_spk`
   ADD CONSTRAINT `tb_spk_ibfk_1` FOREIGN KEY (`id_pengajuan_spk`) REFERENCES `tb_pengajuan` (`id_pengajuan`);
+
+--
+-- Constraints for table `tb_surat_masuk`
+--
+ALTER TABLE `tb_surat_masuk`
+  ADD CONSTRAINT `tb_surat_masuk_ibfk_1` FOREIGN KEY (`nik`) REFERENCES `tb_user` (`nik`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
