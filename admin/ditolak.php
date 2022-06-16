@@ -47,12 +47,12 @@ $nama = $tb_user["nama_user"];
     <!-- Awal Isi Konten -->
     <div class="container-fluid">
         <!-- Halaman kepala -->
-        <h1 class="h3 mb-2 text-gray-800">Pengajuan Yang Di Terima</h1>
+        <h1 class="h3 mb-2 text-gray-800">Pengajuan Yang Di Tolak</h1>
         <!-- Data Tabel -->
         <div class="card shadow mb-4">
             <div class="card-header">
                 <div class="d-sm-flex align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Daftar Pengajuan Yang Di Terima</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Daftar Pengajuan Yang Di Tolak</h6>
                 </div>
             </div>
             <div class="card-body">

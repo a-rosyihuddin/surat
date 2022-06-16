@@ -2,7 +2,7 @@
 include "../connect/koneksi.php";
 session_start();
 $nik = $_GET["nik"];
-$delete = mysqli_query($koneksi,"DELETE from tb_user where tb_user.nik='$nik'");
+$delete = mysqli_query($koneksi,"UPDATE tb_user SET user_nik = '' where tb_user.nik='$nik'");
 if($delete){
     $_SESSION["pesan"] = "sukses";
     header("location: ../admin/user.php");
@@ -10,4 +10,3 @@ if($delete){
     $_SESSION["pesan"] = "gagal";
     header("location: ../admin/user.php");
 }
-?>

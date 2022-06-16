@@ -61,7 +61,7 @@ $nama = $tb_user["nama_user"];
         <div class="card shadow mb-4">
             <div class="card-header">
                 <div class="d-sm-flex align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Daftar Data Warga</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Daftar Akun Warga</h6>
                     <a href="../input_data/input_user.php"><button class="btn btn-primary btn-user">Tambah Data</button></a>
                 </div>
             </div>

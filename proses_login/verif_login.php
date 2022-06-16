@@ -2,7 +2,7 @@
 if (isset($_POST["button"])) {
     $nik = $_POST["nik"];
     $nama = $_POST["nama"];
-    $data = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT tb_user.nik, tb_user.nama_user FROM tb_user WHERE tb_user.nik = '$nik' AND tb_user.nama_user='$nama'"));
+    $data = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT tb_user.user_nik, tb_user.nama_user FROM tb_user WHERE tb_user.user_nik = '$nik' AND tb_user.nama_user='$nama'"));
     if ($nik and $nama) {
         if ($data) {
             if ($nik == "admin") {

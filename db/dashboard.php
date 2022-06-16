@@ -2,7 +2,7 @@
 include "../connect/koneksi.php";
 $tb_pengajuan = mysqli_query($koneksi, "SELECT * FROM tb_user INNER JOIN tb_pengajuan USING(nik) INNER JOIN tb_surat USING(kode_surat)");
 while ($row = mysqli_fetch_assoc($tb_pengajuan)) :
-    if ($row["status_pengajuan"] == "Menunggu") { ?>
+    if ($row["status_pengajuan"] == "Menunggu" || $row['jenis_pengajuan'] == 'Revisi') { ?>
         <tr>
             <td><?= $row["nik"] ?></td>
             <td><?= $row["nama_user"] ?></td>
@@ -36,7 +36,7 @@ while ($row = mysqli_fetch_assoc($tb_pengajuan)) :
                     <a href="../data_input/data_spk.php?id_pengajuan=<?= $row['id_pengajuan'] ?>">View Data</a>
                 </td>
             <?php } ?>
-
+            <td><?= $row["jenis_pengajuan"] ?></td>
             <td>
                 <a href="../update_data/terima_pengajuan.php?id_pengajuan=<?= $row["id_pengajuan"] ?>&kode_surat=<?= $row["kode_surat"] ?>&nik_user=<?= $row["nik"] ?>"><button type="button" class="btn btn-primary" style="margin-bottom: 10px;">Terima</button></a>
                 <a href="../update_data/tolak_pengajuan.php?id_pengajuan=<?= $row["id_pengajuan"] ?>&kode_surat=<?= $row["kode_surat"] ?>&nik_user=<?= $row["nik"] ?>"><button type="button" class="btn btn-danger">Tolak</button></a>

@@ -34,7 +34,8 @@
                 <div id="userMenu" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Pilihan</h6>
-                        <a class="collapse-item" href="../admin/user.php">User</a>
+                        <a class="collapse-item" href="../admin/user.php">Akun User</a>
+                        <a class="collapse-item" href="../admin/warga.php">Data Warga</a>
                     </div>
                 </div>
             </li>
@@ -65,7 +66,8 @@
                 <div id="surat" class="collapse" aria-labelledby="headingsurat" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Pilihan</h6>
-                        <a class="collapse-item" href="../admin/semua_surat.php">Semua Surat Keluar</a>
+                        <a class="collapse-item" href="../admin/surat_masuk.php">Surat Masuk </a>
+                        <a class="collapse-item" href="../admin/surat_keluar.php">Surat Keluar </a>
                     </div>
                 </div>
             </li>

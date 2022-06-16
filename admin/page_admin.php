@@ -238,6 +238,7 @@ $nama = $tb_user["nama_user"];
                                 <th>Waktu Pengajuan</th>
                                 <th>Keperluan</th>
                                 <th>Data User</th>
+                                <th>Jenis Pengajuan</th>
                                 <th>Option</th>
                             </tr>
                         </thead>

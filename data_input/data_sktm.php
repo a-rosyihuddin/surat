@@ -2,15 +2,15 @@
 include "../connect/koneksi.php";
 include "../proses_login/session_login.php";
 $nik = $_SESSION["nik"];
-$tb_user = mysqli_query($koneksi,"SELECT * FROM tb_user where nik='$nik'");
-$data = mysqli_fetch_assoc($tb_user);
-$nama = $data["nama"];
+$tb_user = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM tb_user where nik='$nik'"));
+$nama = $tb_user["nama_user"];
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin | inputan sktm</title>
@@ -19,22 +19,23 @@ $nama = $data["nama"];
     <link href="../assets/img/gresik.png" rel="icon">
     <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
+
 <body>
-    <?php include "../desain/sidebar_admin.php";?>
-    <?php include "../desain/navbar_admin.php";?>
+    <?php include "../desain/sidebar_admin.php"; ?>
+    <?php include "../desain/navbar_admin.php"; ?>
     <?php
     $id_pengajuan = $_GET["id_pengajuan"];
-    $data_sktm = mysqli_fetch_assoc(mysqli_query($koneksi,"SELECT * FROM tb_sktm, tb_pengajuan where id_pengajuan_sktm=$id_pengajuan"));
+    $data_sktm = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM tb_sktm, tb_pengajuan where id_pengajuan_sktm=$id_pengajuan"));
     ?>
     <!-- Awal Isi Konten -->
     <div class="container-fluid">
-        
+
         <!-- Halaman kepala -->
 
         <!-- Content Row -->
     </div>
-        <!-- Awal Isi Konten -->
-        <div class="container-fluid">
+    <!-- Awal Isi Konten -->
+    <div class="container-fluid">
         <!-- Data Tabel -->
         <div class="card shadow mb-4">
             <div class="card-header">
@@ -49,7 +50,6 @@ $nama = $data["nama"];
                             <tr>
                                 <th>No.</th>
                                 <th>Jenis Data</th>
-                                <th></th>
                                 <th>Inputan User</th>
                             </tr>
                         </thead>
@@ -57,51 +57,51 @@ $nama = $data["nama"];
                             <tr>
                                 <td>1.</td>
                                 <td>Nama Lengkap</td>
-                                <td>: <?= $data_sktm["nama"]?></td>
+                                <td>: <?= $data_sktm["nama_sktm"] ?></td>
                             </tr>
 
                             <tr>
                                 <td>2.</td>
                                 <td>Tempat Lahir</td>
-                                <td>: <?= $data_sktm["tempat_lahir"]?></td>
+                                <td>: <?= $data_sktm["tempat_lahir_sktm"] ?></td>
                             </tr>
 
                             <tr>
                                 <td>3.</td>
                                 <td>Tanggal lahir</td>
-                                <td>: <?= $data_sktm["tgl_lahir"]?></td>
+                                <td>: <?= $data_sktm["tgl_lahir_sktm"] ?></td>
                             </tr>
 
                             <tr>
                                 <td>4.</td>
                                 <td>jenis kelamin</td>
-                                <td>: <?= $data_sktm["gender"]?></td>
+                                <td>: <?= $data_sktm["gender_sktm"] ?></td>
                             </tr>
 
                             <tr>
                                 <td>5.</td>
                                 <td>status perkawinan</td>
-                                <td>: <?= $data_sktm["status"]?></td>
+                                <td>: <?= $data_sktm["status_sktm"] ?></td>
                             </tr>
 
                             <tr>
                                 <td>6.</td>
                                 <td>Pekerjaan</td>
-                                <td>: <?= $data_sktm["pekerjaan"]?></td>
+                                <td>: <?= $data_sktm["pekerjaan_sktm"] ?></td>
                             </tr>
 
                             <tr>
                                 <td>7.</td>
                                 <td>Alamat</td>
-                                <td>: <?= $data_sktm["alamat"]?></td>
+                                <td>: <?= $data_sktm["alamat_sktm"] ?></td>
                             </tr>
 
                             <tr>
                                 <td rowspan="5">8.</td>
                                 <td rowspan="5">Keperluan</td>
-                                <td>: <?= $data_sktm["keperluan"]?></td>
+                                <td>: <?= $data_sktm["keperluan"] ?></td>
                             </tr>
-                            
+
                         </tbody>
                     </table>
                 </div>
@@ -128,4 +128,5 @@ $nama = $data["nama"];
     <!-- Page level custom scripts -->
     <script src="../js/demo/datatables-demo.js"></script>
 </body>
+
 </html>

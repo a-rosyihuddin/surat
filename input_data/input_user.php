@@ -4,6 +4,7 @@ include "../proses_login/session_login.php";
 $nik = $_SESSION["nik"];
 $tb_user = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM tb_user where nik='$nik'"));
 $nama = $tb_user["nama_user"];
+$data = mysqli_query($koneksi, "SELECT tb_user.nik FROM tb_user WHERE tb_user.user_nik = ''")
 ?>
 
 <!DOCTYPE html>
@@ -37,25 +38,17 @@ $nama = $tb_user["nama_user"];
           <div class="form-group row">
             <label for="input_nama_barang" class="col-sm-2 col-form-label">NIK</label>
             <div class="col-md-3">
-              <input type="text" class="form-control" name="nik" placeholder="Masukkan NIK">
+              <select type="text" class="form-control" name="nik" placeholder="Masukkan NIK">
+                <?php foreach ($data as $row) : ?>
+                  <option value="<?= $row['nik'] ?>"><?= $row['nik'] ?></option>
+                <?php endforeach ?>
+              </select>
             </div>
           </div>
           <div class="form-group row">
             <label for="input_nama_barang" class="col-sm-2 col-form-label">Nama</label>
             <div class="col-md-3">
               <input type="text" class="form-control" name="nama" placeholder="Masukkan Nama">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="input_stock_barang" class="col-sm-2 col-form-label">RT</label>
-            <div class="col-md-3">
-              <input type="number" class="form-control" name="rt" placeholder="Masukkan RT">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="input_stock_barang" class="col-sm-2 col-form-label">RW</label>
-            <div class="col-md-3">
-              <input type="number" class="form-control" name="rw" placeholder="Masukkan RW">
             </div>
           </div>
           <div class="form-group row">

@@ -6,7 +6,7 @@ $kode_surat = $_GET["kode_surat"];
 $nik_user = $_GET["nik_user"];
 $bulan = date('m');
 $tahun = date('Y');
-$data = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT COUNT(tb_arsip_surat.nomor_surat) AS nomor FROM tb_arsip_surat WHERE tb_arsip_surat.keterangan='Surat Keluar'"));
+$data = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT COUNT(tb_arsip_surat.nomor_surat) AS nomor FROM tb_arsip_surat"));
 $nomor = (string)$data["nomor"] + 1;
 if (strlen($nomor) == 1) {
     $nomor_surat = '0' . $nomor . '/' . $kode_surat . '/' . 'DesaGluranPloso' . '/' . $bulan . '/' . $tahun;
@@ -17,7 +17,7 @@ if (strlen($nomor) == 1) {
 // die;
 
 $update = mysqli_query($koneksi, "UPDATE tb_pengajuan SET tb_pengajuan.status_pengajuan='Di Terima' where tb_pengajuan.id_pengajuan=$id_pengajuan");
-$tambah_nomor_surat = mysqli_query($koneksi, "INSERT INTO tb_arsip_surat(nomor_surat, id_pengajuan, file_surat,tgl_surat, keterangan) VALUES('$nomor_surat',$id_pengajuan,'',NULL,'Surat Keluar')");
+$tambah_nomor_surat = mysqli_query($koneksi, "INSERT INTO tb_arsip_surat(nomor_surat, id_pengajuan, file_surat,tgl_surat) VALUES('$nomor_surat',$id_pengajuan,'',NULL)");
 $tambah_suratKeluar = mysqli_query($koneksi, "UPDATE tb_surat SET tb_surat.surat_keluar= (SELECT tb_surat.surat_keluar+1) WHERE tb_surat.kode_surat='$kode_surat'");
 
 if ($update && $tambah_nomor_surat && $tambah_suratKeluar) {
