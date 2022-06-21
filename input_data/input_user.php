@@ -1,10 +1,10 @@
 <?php
 include "../connect/koneksi.php";
 include "../proses_login/session_login.php";
-$nik = $_SESSION["nik"];
-$tb_user = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM tb_user where nik='$nik'"));
+$username = $_SESSION["username"];
+$tb_user = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM tb_user where username='$username'"));
 $nama = $tb_user["nama_user"];
-$data = mysqli_query($koneksi, "SELECT tb_user.nik FROM tb_user WHERE tb_user.user_nik = ''")
+$data = mysqli_query($koneksi, "SELECT * FROM tb_user where tb_user.username is null")
 ?>
 
 <!DOCTYPE html>
@@ -46,9 +46,15 @@ $data = mysqli_query($koneksi, "SELECT tb_user.nik FROM tb_user WHERE tb_user.us
             </div>
           </div>
           <div class="form-group row">
-            <label for="input_nama_barang" class="col-sm-2 col-form-label">Nama</label>
+            <label for="input_nama_barang" class="col-sm-2 col-form-label">Username</label>
             <div class="col-md-3">
-              <input type="text" class="form-control" name="nama" placeholder="Masukkan Nama">
+              <input type="text" class="form-control" name="username" placeholder="Masukkan Username">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="input_nama_barang" class="col-sm-2 col-form-label">Password</label>
+            <div class="col-md-3">
+              <input type="password" class="form-control" name="password" placeholder="Masukkan Password">
             </div>
           </div>
           <div class="form-group row">

@@ -1,10 +1,12 @@
 <?php
 include "../connect/koneksi.php";
-$tb_user = mysqli_query($koneksi, "SELECT * FROM tb_user");
+$tb_user = mysqli_query($koneksi, "SELECT * FROM tb_user where tb_user.username is NOT null");
+
 while ($row = mysqli_fetch_assoc($tb_user)) :
-    if ($row["role_user"] != 'Admin' and $row['user_nik'] != NULL) { ?>
+    if ($row["role_user"] != 'Admin') { ?>
         <tr>
             <td><?= $row["nik"] ?></td>
+            <td><?= $row["username"] ?></td>
             <td><?= $row["nama_user"] ?></td>
             <td><?= $row["rt"] ?></td>
             <td><?= $row["rt"] ?></td>

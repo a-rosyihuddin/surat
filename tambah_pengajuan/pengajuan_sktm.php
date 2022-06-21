@@ -10,7 +10,7 @@ if (isset($_POST["button"])) {
   $status = $_POST["status"];
   $pekerjaan = $_POST["pekerjaan"];
   $alamat = $_POST["alamat"];
-  $nik_user = $_SESSION["nik"];
+  $nik_user = $_SESSION["nik"]; 
   $kode_surat = $_GET["kode_surat"];
   // set jam asia di jakarta
   date_default_timezone_set('Asia/Jakarta');

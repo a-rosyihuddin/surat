@@ -1,14 +1,14 @@
 <?php
 session_start();
 // di gunakan agar tidak dapat masuk ke tampilan user maupun admin
-if(isset($_SESSION['nik'])){
-    if($_SESSION["nik"]== "admin"){
-        header('location: ../admin/page_admin.php');
-        exit;
-    }else if($_SESSION["nik"]!="admin"){
-        header('location: ../user/home.php');
-        exit;
-    }
+if (isset($_SESSION['username'])) {
+  if ($_SESSION["username"] == "admin") {
+    header('location: ../admin/page_admin.php');
+    exit;
+  } else if ($_SESSION["username"] != "admin") {
+    header('location: ../user/home.php');
+    exit;
+  }
 }
 ?>
 <!DOCTYPE html>
@@ -52,63 +52,65 @@ if(isset($_SESSION['nik'])){
 </head>
 
 <body>
-    <header id="header" class="d-flex align-items-center">
-        <div class="container d-flex justify-content-between align-items-center" >
-        <div class="logo" > 
-            <h1><a href="index.html">  Kelurahan Desa Pare</a></h1>
-            <!-- Uncomment below if you prefer to use an image logo -->
-        </div>
-        <nav id="navbar" class="navbar">
-            <ul>
-            <li><a  href="#">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="#">Services</a></li>
-            </ul>
-            <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav><!-- .navbar -->
-        </div>
-    </header>
- 
-<!-- End Header -->
+  <header id="header" class="d-flex align-items-center">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div class="logo">
+        <h1><a href="../index.php"> Kelurahan Desa Pare</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+      </div>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="../index.php">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="#">Services</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+    </div>
+  </header>
+
+  <!-- End Header -->
   <!-- ======= Hero Section ======= -->
-  
-  
-  <section id="hero">
-    <div class="fix" style="margin-top: 5%;"> 
-    
+
+
+  <section id="hero" style="height: 500px;">
+    <div class="fix" style="margin-top: 5%;">
       <div class="container">
         <img src="../assets/img/gresik.png" alt="" class="img-fluid" style="width: 20%; margin-left: 8%; margin-bottom: 5%;   ">
         <h4 class="text-center" style="margin-top: -17%; margin-left: 16%; margin-right: -4%">FORM LOG-IN</h4>
         <hr>
         <form method="POST">
           <div class="form-group">
-            <label for="" style="margin-bottom: 5px;">Nama</label>
+            <label for="" style="margin-bottom: 5px;">Username</label>
             <div class="input-group">
               <div class="input-group-prepend">
-                <div class="input-group-text " style="height: 38px;"><i class="fas fa-user" ></i></div>
+                <div class="input-group-text " style="height: 38px;"><i class="fas fa-user"></i></div>
               </div>
-              <input type="text" name="nama" class="form-control" placeholder="Masukan Nama" style="margin-bottom: 5px;">
+              <input type="text" name="username" class="form-control" placeholder="Masukan Username" style="margin-bottom: 5px;">
             </div>
           </div>
 
           <div class="form-group">
-            <label for="" style="margin-bottom: 5px;">NIK</label>
+            <label for="" style="margin-bottom: 5px;">Password</label>
             <div class="input-group">
               <div class="input-group-prepend">
                 <div class="input-group-text " style="height: 38px;"><i class="fas fa-address-card"></i></div>
               </div>
-              <input type="text" name="nik" class="form-control" placeholder="Masukan NIK" style="margin-bottom: 5px;">
+              <input type="password" name="password" class="form-control" placeholder="Masukan Password" style="margin-bottom: 5px;">
             </div>
           </div>
           <?php
           include "../connect/koneksi.php";
           include "../proses_login/verif_login.php";
           ?>
+          <a href="register.php">
+            <h6>belum punya akun? buat akun</h6>
+          </a>
           <button type="submit" name="button" class="btn-primary" style="margin-top: 5px;">submit</button>
         </form>
       </div>
     </div>
-  </section>  
+  </section>
   <!-- End Hero -->
 
   <!-- ======= Footer ======= -->

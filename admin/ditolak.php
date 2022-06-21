@@ -1,8 +1,8 @@
 <?php
 include "../connect/koneksi.php";
 include "../proses_login/session_login.php";
-$nik = $_SESSION["nik"];
-$tb_user = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM tb_user where nik='$nik'"));
+$username = $_SESSION["username"];
+$tb_user = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM tb_user where username='$username'"));
 $nama = $tb_user["nama_user"];
 ?>
 

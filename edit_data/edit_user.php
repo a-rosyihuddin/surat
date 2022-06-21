@@ -1,9 +1,10 @@
 <?php
 include "../connect/koneksi.php";
 include "../proses_login/session_login.php";
-$nik = $_SESSION["nik"];
-$tb_user = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM tb_user where nik='$nik'"));
+$username = $_SESSION["username"];
+$tb_user = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM tb_user where username='$username'"));
 $nama = $tb_user["nama_user"];
+$nik = $tb_user["nik"]
 ?>
 
 <!DOCTYPE html>
@@ -36,11 +37,24 @@ $nama = $tb_user["nama_user"];
         <h6 class="m-0 font-weight-bold text-primary">Edit User</h6>
       </div>
       <div class="card-body">
-        <form action="../update_data/update_user.php?nik_lama=<?= $nik ?>" method="POST">
+        <form action="../update_data/update_user.php" method="POST">
           <div class="form-group row">
             <label for="input_nama_barang" class="col-sm-2 col-form-label">NIK</label>
             <div class="col-md-3">
-              <input type="text" class="form-control" name="nik" placeholder="Masukkan NIK" value="<?= $data['nik'] ?>">
+              <input type="text" class="form-control" name="nik" placeholder="Masukkan NIK" value="<?= $data['nik'] ?>" disabled>
+              <input type="hidden" class="form-control" name="nik" placeholder="Masukkan NIK" value="<?= $data['nik'] ?>">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="input_nama_barang" class="col-sm-2 col-form-label">Username</label>
+            <div class="col-md-3">
+              <input type="text" class="form-control" name="username" placeholder="Masukkan Username" value="<?= $data['username'] ?>">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="input_nama_barang" class="col-sm-2 col-form-label">Password</label>
+            <div class="col-md-3">
+              <input type="password" class="form-control" name="password" placeholder="Masukkan Password" value="<?= $data['password'] ?>">
             </div>
           </div>
           <div class="form-group row">

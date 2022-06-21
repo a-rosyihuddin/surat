@@ -72,7 +72,7 @@ if (isset($_SESSION['nik'])) {
 
 
       <div class="logo">
-        <h1><a href="index.html"> Kelurahan Desa Pare</a></h1>
+        <h1><a href="index.php"> Kelurahan Desa Pare</a></h1>
 
         <!-- Uncomment below if you prefer to use an image logo -->
       </div>
