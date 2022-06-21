@@ -16,16 +16,31 @@ if (strlen($nomor) == 1) {
 // var_dump($nomor);
 // die;
 
-$update = mysqli_query($koneksi, "UPDATE tb_pengajuan SET tb_pengajuan.status_pengajuan='Di Terima' where tb_pengajuan.id_pengajuan=$id_pengajuan");
-$tambah_nomor_surat = mysqli_query($koneksi, "INSERT INTO tb_arsip_surat(nomor_surat, id_pengajuan, file_surat,tgl_surat) VALUES('$nomor_surat',$id_pengajuan,'',NULL)");
-$tambah_suratKeluar = mysqli_query($koneksi, "UPDATE tb_surat SET tb_surat.surat_keluar= (SELECT tb_surat.surat_keluar+1) WHERE tb_surat.kode_surat='$kode_surat'");
+$data_pengajuan = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT tb_pengajuan.jenis_pengajuan from tb_pengajuan where tb_pengajuan.id_pengajuan = $id_pengajuan"));
 
-if ($update && $tambah_nomor_surat && $tambah_suratKeluar) {
-    $_SESSION["pesan"] = "sukses";
-    header("location: ../admin/page_admin.php");
-    echo "Berhasil";
+if ($data_pengajuan['jenis_pengajuan'] == 'Baru') {
+    $update = mysqli_query($koneksi, "UPDATE tb_pengajuan SET tb_pengajuan.status_pengajuan='Di Terima' where tb_pengajuan.id_pengajuan=$id_pengajuan");
+    $tambah_nomor_surat = mysqli_query($koneksi, "INSERT INTO tb_arsip_surat(nomor_surat, id_pengajuan, file_surat,tgl_surat) VALUES('$nomor_surat',$id_pengajuan,'',NULL)");
+    $tambah_suratKeluar = mysqli_query($koneksi, "UPDATE tb_surat SET tb_surat.surat_keluar= (SELECT tb_surat.surat_keluar+1) WHERE tb_surat.kode_surat='$kode_surat'");
+
+    if ($update && $tambah_nomor_surat && $tambah_suratKeluar) {
+        $_SESSION["pesan"] = "sukses";
+        header("location: ../admin/page_admin.php");
+        echo "Berhasil";
+    } else {
+        $_SESSION["pesan"] = "gagal";
+        header("location: ../admin/page_admin.php");
+        echo "Gagal";
+    }
 } else {
-    $_SESSION["pesan"] = "gagal";
-    header("location: ../admin/page_admin.php");
-    echo "Gagal";
+    $update = mysqli_query($koneksi, "UPDATE tb_pengajuan SET tb_pengajuan.status_pengajuan='Revisi Di Terima' where tb_pengajuan.id_pengajuan=$id_pengajuan");
+    if ($update) {
+        $_SESSION["pesan"] = "sukses";
+        header("location: ../admin/page_admin.php");
+        echo "Berhasil";
+    } else {
+        $_SESSION["pesan"] = "gagal";
+        header("location: ../admin/page_admin.php");
+        echo "Gagal";
+    }
 }

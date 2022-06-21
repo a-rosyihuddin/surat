@@ -51,7 +51,7 @@
                         <h6 class="collapse-header">Menu</h6>
                         <a class="collapse-item" href="../admin/diterima.php">Pengajuan Di Terima</a>
                         <a class="collapse-item" href="../admin/ditolak.php">Pengajuan Di Tolak</a>
-                        <a class="collapse-item" href="../admin/pengajuan_revisi.php">Pengajuan Revisi</a>
+                        <a class="collapse-item" href="../admin/revisi.php">Pengajuan Revisi</a>
                         <a class="collapse-item" href="../admin/semua_pengajuan.php">Riwayat Pengajuan</a>
                     </div>
                 </div>

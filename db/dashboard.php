@@ -2,7 +2,7 @@
 include "../connect/koneksi.php";
 $tb_pengajuan = mysqli_query($koneksi, "SELECT * FROM tb_user INNER JOIN tb_pengajuan USING(nik) INNER JOIN tb_surat USING(kode_surat)");
 while ($row = mysqli_fetch_assoc($tb_pengajuan)) :
-    if ($row["status_pengajuan"] == "Menunggu" || $row['jenis_pengajuan'] == 'Revisi') { ?>
+    if ($row["status_pengajuan"] == "Menunggu") { ?>
         <tr>
             <td><?= $row["nik"] ?></td>
             <td><?= $row["nama_user"] ?></td>
