@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 16, 2022 at 09:08 AM
+-- Generation Time: Jun 21, 2022 at 04:14 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -40,9 +40,9 @@ CREATE TABLE `tb_arsip_surat` (
 
 INSERT INTO `tb_arsip_surat` (`nomor_surat`, `id_pengajuan`, `file_surat`, `tgl_surat`) VALUES
 ('01/SKTM/DesaGluranPloso/06/2022', 31, '31-Ahmad-Surat Keterangan Tidak Mamapu.pdf', '2022-06-16'),
-('02/SKTM/DesaGluranPloso/06/2022', 32, '', NULL),
+('02/SKTM/DesaGluranPloso/06/2022', 32, '32-Ahmad-Surat Keterangan Tidak Mamapu.pdf', '2022-06-21'),
 ('03/SKTM/DesaGluranPloso/06/2022', 31, '', NULL),
-('04/SKTM/DesaGluranPloso/06/2022', 32, '', NULL);
+('04/SKTM/DesaGluranPloso/06/2022', 32, '32-Ahmad-Surat Keterangan Tidak Mamapu.pdf', '2022-06-21');
 
 -- --------------------------------------------------------
 
@@ -67,7 +67,8 @@ CREATE TABLE `tb_pengajuan` (
 INSERT INTO `tb_pengajuan` (`id_pengajuan`, `nik`, `kode_surat`, `tgl_pengajuan`, `keperluan`, `jenis_pengajuan`, `status_pengajuan`) VALUES
 (31, '1234567', 'SKTM', '2022-06-16 11:40:57', 'dxwadfw', 'Revisi', 'Di Tolak'),
 (32, '1234567', 'SKTM', '2022-06-16 11:59:18', 'dxwadfw', 'Baru', 'Di Terima'),
-(33, '1234567', 'SKTM', '2022-06-16 12:33:35', 'dxwadfw', 'Baru', 'Menunggu');
+(33, '1234567', 'SKTM', '2022-06-16 12:33:35', 'dxwadfw', 'Baru', 'Menunggu'),
+(34, '1234567', 'SKTM', '2022-06-21 19:42:00', 'fredvr', 'Baru', 'Menunggu');
 
 -- --------------------------------------------------------
 
@@ -138,7 +139,8 @@ CREATE TABLE `tb_sktm` (
 INSERT INTO `tb_sktm` (`id_pengajuan_sktm`, `kode_surat`, `nama_sktm`, `tempat_lahir_sktm`, `tgl_lahir_sktm`, `gender_sktm`, `status_sktm`, `pekerjaan_sktm`, `alamat_sktm`) VALUES
 (31, '12345', 'SKTM', 'mjbm', '2022-06-17', 'Laki-Laki', 'jb,b ,', ',jn,j', 'ljl'),
 (32, '12345', 'SKTM', 'hyhy', '2022-06-15', 'Laki-Laki', 'dwda', 'eaadf', 'dsf'),
-(33, '12345', 'SKTM', 'juiui', '2022-06-17', 'Laki-Laki', 'iyukiuy', 'uyoy', 'oyoyi');
+(33, '12345', 'SKTM', 'juiui', '2022-06-17', 'Laki-Laki', 'iyukiuy', 'uyoy', 'oyoyi'),
+(34, '12345', 'SKTM', 'bthfgh', '2022-06-16', 'Laki-Laki', 'tdf', 'hbtft', 'htrf');
 
 -- --------------------------------------------------------
 
@@ -253,6 +255,13 @@ CREATE TABLE `tb_surat_masuk` (
   `tgl_surat_masuk` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `tb_surat_masuk`
+--
+
+INSERT INTO `tb_surat_masuk` (`nomor_surat`, `nik`, `jenis_surat`, `file_surat`, `tgl_surat_masuk`) VALUES
+('greg', 'admin', 'drgbft', 'greg-drgbft-2022-06-22.pdf', '2022-06-22');
+
 -- --------------------------------------------------------
 
 --
@@ -261,7 +270,8 @@ CREATE TABLE `tb_surat_masuk` (
 
 CREATE TABLE `tb_user` (
   `nik` varchar(100) NOT NULL,
-  `user_nik` varchar(100) DEFAULT NULL,
+  `username` varchar(100) DEFAULT NULL,
+  `password` varchar(100) NOT NULL,
   `nama_user` varchar(100) NOT NULL,
   `rt` char(10) DEFAULT NULL,
   `rw` char(10) DEFAULT NULL,
@@ -272,9 +282,13 @@ CREATE TABLE `tb_user` (
 -- Dumping data for table `tb_user`
 --
 
-INSERT INTO `tb_user` (`nik`, `user_nik`, `nama_user`, `rt`, `rw`, `role_user`) VALUES
-('1234567', '1234567', 'Ahmad', '2', '1', 'Warga'),
-('admin', 'admin', 'admin', '', '', 'Admin');
+INSERT INTO `tb_user` (`nik`, `username`, `password`, `nama_user`, `rt`, `rw`, `role_user`) VALUES
+('1112233', 'yoga', '123', 'Yoga Tirta Permana', '1', '2', 'Warga'),
+('11224433', NULL, '', 'Tegar Fakhruddin', '2', '2', 'Warga'),
+('12345', 'fanani', '123', 'Ahmad Fanani', '1', '2', 'Warga'),
+('1234567', 'ahmad', '123', 'Ahmad Rosyihuddin', '2', '1', 'Warga'),
+('12345678', NULL, '', 'Kharisma Intan Safitri', '2', '3', 'Warga'),
+('admin', 'admin', 'admin', 'admin', '', '', 'Admin');
 
 --
 -- Indexes for dumped tables
@@ -349,7 +363,7 @@ ALTER TABLE `tb_surat_masuk`
 --
 ALTER TABLE `tb_user`
   ADD PRIMARY KEY (`nik`),
-  ADD UNIQUE KEY `user_nik` (`user_nik`);
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -359,7 +373,7 @@ ALTER TABLE `tb_user`
 -- AUTO_INCREMENT for table `tb_pengajuan`
 --
 ALTER TABLE `tb_pengajuan`
-  MODIFY `id_pengajuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id_pengajuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `tb_skk`
@@ -377,7 +391,7 @@ ALTER TABLE `tb_skm`
 -- AUTO_INCREMENT for table `tb_sktm`
 --
 ALTER TABLE `tb_sktm`
-  MODIFY `id_pengajuan_sktm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id_pengajuan_sktm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `tb_sl`
