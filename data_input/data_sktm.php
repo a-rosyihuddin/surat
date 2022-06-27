@@ -25,7 +25,7 @@ $nama = $tb_user["nama_user"];
     <?php include "../desain/navbar_admin.php"; ?>
     <?php
     $id_pengajuan = $_GET["id_pengajuan"];
-    $data_sktm = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM tb_sktm, tb_pengajuan where id_pengajuan_sktm=$id_pengajuan"));
+    $data_sktm = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM tb_sktm INNER JOIN tb_pengajuan ON tb_pengajuan.id_pengajuan=tb_sktm.id_pengajuan_sktm INNER JOIN tb_user USING(nik) where id_pengajuan_sktm=$id_pengajuan"));
     ?>
     <!-- Awal Isi Konten -->
     <div class="container-fluid">
@@ -57,7 +57,7 @@ $nama = $tb_user["nama_user"];
                             <tr>
                                 <td>1.</td>
                                 <td>Nama Lengkap</td>
-                                <td>: <?= $data_sktm["nama_sktm"] ?></td>
+                                <td>: <?= $data_sktm["nama_user"] ?></td>
                             </tr>
 
                             <tr>
