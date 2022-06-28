@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 21, 2022 at 07:07 PM
+-- Generation Time: Jun 28, 2022 at 03:33 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -39,8 +39,7 @@ CREATE TABLE `tb_arsip_surat` (
 --
 
 INSERT INTO `tb_arsip_surat` (`nomor_surat`, `id_pengajuan`, `file_surat`, `tgl_surat`) VALUES
-('01/SKTM/DesaGluranPloso/06/2022', 39, '39-Ahmad Rosyihuddin-Surat Keterangan Tidak Mamapu.pdf', '2022-06-22'),
-('02/SKTM/DesaGluranPloso/06/2022', 40, '', NULL);
+('01/SKTM/DesaGluranPloso/06/2022', 45, '45-Ahmad Rosyihuddin-Surat Keterangan Tidak Mamapu.pdf', '2022-06-28');
 
 -- --------------------------------------------------------
 
@@ -63,10 +62,9 @@ CREATE TABLE `tb_pengajuan` (
 --
 
 INSERT INTO `tb_pengajuan` (`id_pengajuan`, `nik`, `kode_surat`, `tgl_pengajuan`, `keperluan`, `jenis_pengajuan`, `status_pengajuan`) VALUES
-(39, '1234567', 'SKTM', '2022-06-21 23:30:03', 'gredgb', 'Revisi', 'Revisi Selesai'),
-(40, '1234567', 'SKTM', '2022-06-21 23:30:14', 'vfdvd', 'Baru', 'Di Terima'),
-(41, '1234567', 'SKTM', '2022-06-21 23:30:27', 'bdgvbx', 'Baru', 'Menunggu'),
-(42, '1234567', 'SKTM', '2022-06-21 23:30:40', 'frdrvfxg', 'Baru', 'Di Tolak');
+(45, '1234567', 'SKTM', '2022-06-28 08:28:33', 'Kuliah', 'Baru', 'Di Terima'),
+(46, '1234567', 'SKTM', '2022-06-28 08:29:23', 'tes', 'Baru', 'Di Tolak'),
+(47, '1234567', 'SKTM', '2022-06-28 08:30:09', 'tesss', 'Baru', 'Menunggu');
 
 -- --------------------------------------------------------
 
@@ -135,10 +133,9 @@ CREATE TABLE `tb_sktm` (
 --
 
 INSERT INTO `tb_sktm` (`id_pengajuan_sktm`, `kode_surat`, `nama_sktm`, `tempat_lahir_sktm`, `tgl_lahir_sktm`, `gender_sktm`, `status_sktm`, `pekerjaan_sktm`, `alamat_sktm`) VALUES
-(39, '12345', 'SKTM', 'dfvf', '2022-06-24', 'Laki-Laki', 'vfdx', 'vdfv', 'vdfvdb'),
-(40, '12345', 'SKTM', 'gtxdg', '2022-06-23', 'Laki-Laki', 'dfxb db', 'dbxfb', 'xfbxfb'),
-(41, '12345', 'SKTM', 'fbfgb', '2022-06-23', 'Laki-Laki', 'bdfd', 'fbdfb fbb', 'bfgb'),
-(42, '12345', 'SKTM', 'bfbfg', '2022-07-01', 'Laki-Laki', 'bgf', 'bgfb', 'bgfb');
+(45, '12345', 'SKTM', 'Gresik', '2022-06-28', 'Laki-Laki', 'Belum Kawin', 'Mahasiswa', 'Gresik'),
+(46, '12345', 'SKTM', 'tes', '2022-06-28', 'Laki-Laki', 'tes', 'tes', 'tes'),
+(47, '12345', 'SKTM', 'tesss', '2022-06-28', 'Laki-Laki', 'tesss', 'tesss', 'tesss');
 
 -- --------------------------------------------------------
 
@@ -233,7 +230,7 @@ CREATE TABLE `tb_surat` (
 INSERT INTO `tb_surat` (`kode_surat`, `jenis_surat`, `surat_keluar`) VALUES
 ('SKK', 'Surat Keterangan Kematian', 0),
 ('SKM', 'Surat Keterangan Menikah', 0),
-('SKTM', 'Surat Keterangan Tidak Mamapu', 2),
+('SKTM', 'Surat Keterangan Tidak Mamapu', 1),
 ('SL', 'Surat Lainnya', 0),
 ('SM', 'Surat Masuk', 0),
 ('SPA', 'Surat Pengantar Akta', 0),
@@ -364,7 +361,7 @@ ALTER TABLE `tb_user`
 -- AUTO_INCREMENT for table `tb_pengajuan`
 --
 ALTER TABLE `tb_pengajuan`
-  MODIFY `id_pengajuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id_pengajuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `tb_skk`
@@ -382,7 +379,7 @@ ALTER TABLE `tb_skm`
 -- AUTO_INCREMENT for table `tb_sktm`
 --
 ALTER TABLE `tb_sktm`
-  MODIFY `id_pengajuan_sktm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id_pengajuan_sktm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `tb_sl`
